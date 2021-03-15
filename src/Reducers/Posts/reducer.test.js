@@ -14,5 +14,5 @@ describe('Posts Reducer',()=>{
             payload:posts
         });
         expect (newState).toEqual(posts);
-    })
-})
+    });
+});
