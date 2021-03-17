@@ -16,22 +16,30 @@ describe(' SharedButton Component',()=>{
             expect(propsError).toBeUndefined();
         });
 
+        // ||> checking for the correct property types
     });
          describe('Renders',()=>{
         let wrapper;
+        let mockFunc;
         beforeEach(()=>{
+            mockFunc=jest.fn();
             const props={
                 buttonText:'Example Button Text',
-                emitEvent:()=>{
-
-                }
+                emitEvent: mockFunc
             };
             wrapper=shallow(<SharedButton {...props}/>);
         });
-
+//component renders without error
         it('Should Render a button',()=>{
             const button=findByTestAttr(wrapper,'buttonComponent');
             expect(button.length).toBe(1);
         });
+
+        it('Should emit callback on click event',()=>{
+            const button=findByTestAttr(wrapper,'buttonComponent');
+            button.simulate('click');
+           const callback=mockFunc.mock.calls.length;
+           expect(callback).toBe(1); 
+        })
     });
 });
